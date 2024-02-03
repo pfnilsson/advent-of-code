@@ -45,13 +45,14 @@ fn substring_appears_twice(main_string: &str, substring: &str) -> bool {
     }
     false
 }
-
 fn substrings_len_two(string: &str) -> Vec<&str> {
-    string
-        .chars()
-        .zip(string.chars().skip(1))
-        .map(|(first, second)| &string[first as usize..=second as usize])
-        .collect()
+    let mut substrings = Vec::new();
+
+    for i in 0..string.len().saturating_sub(1) {
+        substrings.push(&string[i..i + 2]);
+    }
+
+    substrings
 }
 
 fn is_nice2(string: &str) -> bool {
@@ -108,5 +109,5 @@ fn part2(data: &str) -> u32 {
 pub fn solve() {
     let data = utils::read_input_file("2015", "05");
 
-    utils::display_result(part1(&data), part2(&data))
+    utils::display_result(part1(&data), part2(&data));
 }
